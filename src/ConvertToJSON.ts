@@ -52,13 +52,30 @@ function ImportMasterDataSheetActive(googleSheet: GoogleAppsScript.Spreadsheet.S
 
 // すべてのスプレッドシートのデータを取得
 function ImportMasterDataAllSheets(googleSheet: GoogleAppsScript.Spreadsheet.Sheet[]) {
-    let jsonStr: string = "{";
     const startRow = 3;
     const startCol = 1;
     const sheetNames = GetMasterDataAllSheetNames();
-    // const lastRow = googleSheet[1].getLastRow();
-    // const lastCol = googleSheet[1].getLastColumn();
-    // const sheetData = googleSheet[1].getSheetValues(startRow, startCol, lastRow, lastCol);
+
+    // 基本ゲームデータマスタデータ系
+    const baseGameDataGroup: any[] = [];
+    // 金魚マスタデータ系
+    const kingyo: any[] = [];
+    let inKingyoDataGroup: any;
+    // 確率マスタデータ系
+    const probability: any[] = [];
+    let inProbabilityDataGroup: any;
+    // 得点マスタデータ系
+    const score: any[] = [];
+    let inScoreDataGroup: any;
+    // ポイゲージ関連マスタデータ系
+    const poiGauge: any[] = [];
+    let inPoiGaugeDataGroup: any;
+    // 祭りタイムマスタデータ系
+    const festival: any[] = [];
+    let inFestivalDataGroup: any;
+    // ギフト関連マスタデータ系
+    const gift: any[] = [];
+    let inGiftDataGroup: any;
 
     // 金魚すくいゲームマスターデータの呼び出し
     // tslint:disable-next-line:prefer-for-of
@@ -67,77 +84,91 @@ function ImportMasterDataAllSheets(googleSheet: GoogleAppsScript.Spreadsheet.She
         const lastCol = googleSheet[i].getLastColumn();
         const sheetData = googleSheet[i].getSheetValues(startRow, startCol, lastRow, lastCol);
 
-        // 基本ゲームデータマスターデータ
+        // 基本ゲームデータマスタデータシート
         if (googleSheet[i].getSheetName() === sheetNames[0]) {
-            jsonStr += '"base_game_data": {';
-            for (let sheetDataCount = 1; sheetDataCount < sheetData[i].length - 1; ++sheetDataCount) {
-                jsonStr += '"base_game_data_id": ' + sheetData[sheetDataCount][0] + ",";
-                jsonStr += '"play_time": ' + sheetData[sheetDataCount][1] + ",";
-                jsonStr += '"fever_time": ' + sheetData[sheetDataCount][2];
+            for (let sheetDataCount = 1; sheetDataCount <= (lastRow - startRow); ++sheetDataCount) {
+                baseGameDataGroup[sheetDataCount - 1] = {
+                    base_game_data_id: sheetData[sheetDataCount][0],
+                    play_time: sheetData[sheetDataCount][1],
+                    // tslint:disable-next-line:object-literal-sort-keys
+                    fever_time: sheetData[sheetDataCount][2],
+                };
             }
-            jsonStr += "},";
         }
-        // 金魚マスターデータ
+        // 金魚マスタデータシート
         if (googleSheet[i].getSheetName() === sheetNames[1]) {
-            jsonStr += '"kingyo": [';
-            // tslint:disable-next-line:max-line-length
-            jsonStr += JSON.stringify({kingyo_id: sheetData[1][0], probability_id: sheetData[1][2], score_id: sheetData[1][3]});
-            jsonStr += "]";
+            for (let sheetDataCount = 1; sheetDataCount <= (lastRow - startRow); ++sheetDataCount) {
+                inKingyoDataGroup = {
+                    kingyo_id: sheetData[sheetDataCount][0],
+                    probability_id: sheetData[sheetDataCount][2],
+                    score_id: sheetData[sheetDataCount][3],
+                };
+                kingyo[sheetDataCount - 1] = inKingyoDataGroup;
+            }
+        }
+        // 確率マスタデータシート
+        if (googleSheet[i].getSheetName() === sheetNames[2]) {
+            for (let sheetDataCount = 1; sheetDataCount <= (lastRow - startRow); ++sheetDataCount) {
+                inProbabilityDataGroup = {
+                    probability_id: sheetData[sheetDataCount][0],
+                    // tslint:disable-next-line:object-literal-sort-keys
+                    kingyo_id: sheetData[sheetDataCount][1],
+                    occurrence_probability: sheetData[sheetDataCount][2],
+                };
+                probability[sheetDataCount - 1] = inProbabilityDataGroup;
+            }
+        }
+        // 得点マスタデータシート
+        if (googleSheet[i].getSheetName() === sheetNames[3]) {
+            for (let sheetDataCount = 1; sheetDataCount <= (lastRow - startRow); ++sheetDataCount) {
+                inScoreDataGroup = {
+                    score_id: sheetData[sheetDataCount][0],
+                    kingyo_id: sheetData[sheetDataCount][1],
+                    score: sheetData[sheetDataCount][2],
+                    festival_point: sheetData[sheetDataCount][3],
+                };
+                score[sheetDataCount - 1] = inScoreDataGroup;
+            }
+        }
+        // ポイゲージマスタデータシート
+        if (googleSheet[i].getSheetName() === sheetNames[4]) {
+            for (let sheetDataCount = 1; sheetDataCount <= (lastRow - startRow); ++sheetDataCount) {
+                inPoiGaugeDataGroup = {
+                    poigauge_id: sheetData[sheetDataCount][0],
+                    max_gauge_id: sheetData[sheetDataCount][1],
+                    min_gauge_id: sheetData[sheetDataCount][2],
+                    decrease_point: sheetData[sheetDataCount][3],
+                };
+                poiGauge[sheetDataCount - 1] = inPoiGaugeDataGroup;
+            }
+        }
+        // 祭りタイムマスタデータシート
+        if (googleSheet[i].getSheetName() === sheetNames[5]) {
+            for (let sheetDataCount = 1; sheetDataCount <= (lastRow - startRow); ++sheetDataCount) {
+                inFestivalDataGroup = {
+                    festival_time_id: sheetData[sheetDataCount][0],
+                    festival_time_count: sheetData[sheetDataCount][1],
+                    up_to_wasshoi_count: sheetData[sheetDataCount][2],
+                    in_wasshoi_festival_point: sheetData[sheetDataCount][3],
+                    festival_coeff: sheetData[sheetDataCount][4],
+                };
+                festival[sheetDataCount - 1] = inFestivalDataGroup;
+            }
+        }
+        // ギフトマスタデータシート
+        if (googleSheet[i].getSheetName() === sheetNames[6]) {
+            for (let sheetDataCount = 1; sheetDataCount <= (lastRow - startRow); ++sheetDataCount) {
+                inGiftDataGroup = {
+                    gift_point_id: sheetData[sheetDataCount][0],
+                    gift_name: sheetData[sheetDataCount][1],
+                    festival_point: sheetData[sheetDataCount][2],
+                };
+                gift[sheetDataCount - 1] = inGiftDataGroup;
+            }
         }
     }
-    // tslint:disable-next-line:no-console
-    jsonStr += "}";
-    Browser.msgBox(jsonStr);
-    // MakeJsonFile(jsonStr);
-    //     // シート別JSON文字列の整形
-    //     // 基本ゲームデータシート
-    //     if (googleSheet[i].getSheetName() === sheetNames[0]) {
-    //         // マスタデータをJSON文字列にコンバート
-    //         Browser.msgBox(TwoDimensionsArrayLength(sheetData).toString());
-    //     }
-    //     // 金魚シート
-    //     if (googleSheet[i].getSheetName() === sheetNames[i]) {
-    //         for (let sheetCount = 1; sheetCount < sheetData.length; ++sheetCount) {
-    //             // tslint:disable-next-line:max-line-length
-    //             jsonStr += JSON.stringify({kingyo: [sheetData[sheetCount][0], sheetData[sheetCount][2], sheetData[sheetCount][3]]});
-    //         }
-    //     }
-    //     // 確率シート
-    //     if (googleSheet[i].getSheetName() === sheetNames[i]) {
-    //         for (let sheetCount = 1; sheetCount < sheetData.length; ++sheetCount) {
-    //             // tslint:disable-next-line:max-line-length
-    //             jsonStr += JSON.stringify({probability_id: sheetData[sheetCount][0], kingyo_id: sheetData[sheetCount][1], OccurrenceProbability: sheetData[sheetCount][2]});
-    //         }
-    //     }
-    //     // 得点シート
-    //     if (googleSheet[i].getSheetName() === sheetNames[i]) {
-    //         for (let sheetCount = 1; sheetCount < sheetData.length; ++sheetCount) {
-    //             // tslint:disable-next-line:max-line-length
-    //             jsonStr += JSON.stringify({probability_id: sheetData[sheetCount][0], kingyo_id: sheetData[sheetCount][1], score: sheetData[sheetCount][2], festival_point: sheetData[sheetCount][3]});
-    //         }
-    //     }
-    //     // ポイゲージシート
-    //     if (googleSheet[i].getSheetName() === sheetNames[i]) {
-    //         for (let sheetCount = 1; sheetCount < sheetData.length; ++sheetCount) {
-    //             // tslint:disable-next-line:max-line-length
-    //             jsonStr += JSON.stringify({poi_gauge_id: sheetData[sheetCount][0], max_strength_level: sheetData[sheetCount][1], min_strength_level: sheetData[sheetCount][2], decrease_point: sheetData[sheetCount][3]});
-    //         }
-    //     }
-    //     // お祭りタイムシート
-    //     if (googleSheet[i].getSheetName() === sheetNames[i]) {
-    //         for (let sheetCount = 1; sheetCount < sheetData.length; ++sheetCount) {
-    //             // tslint:disable-next-line:max-line-length
-    //             jsonStr += JSON.stringify({festival_time_id: sheetData[sheetCount][0], festival_time_count: sheetData[sheetCount][1], up_to_wasshoi: sheetData[sheetCount][2], in_fes_times_festival_point: sheetData[sheetCount][3], festival_time_coeff: sheetData[sheetCount][4]});
-    //         }
-    //     }
-    //     // ギフトポイントシート
-    //     if (googleSheet[i].getSheetName() === sheetNames[i]) {
-    //         for (let sheetCount = 1; sheetCount < sheetData.length; ++sheetCount) {
-    //             // tslint:disable-next-line:max-line-length
-    //             jsonStr += JSON.stringify({gift_point_id: sheetData[sheetCount][0], festival_point: [sheetCount][2]});
-    //         }
-    //     }
-    // }
+    const result = {base_game_data: baseGameDataGroup, kingyo, probability, score, poiGauge, festival, gift};
+    Browser.msgBox(JSON.stringify(result));
     // MakeJsonFile(jsonStr);
 }
 
