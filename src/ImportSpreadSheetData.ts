@@ -7,20 +7,19 @@ function ImportMasterDataSheetActive(googleSheet: GoogleAppsScript.Spreadsheet.S
     const lastRow = googleSheet.getLastRow();
     const lastCol = googleSheet.getLastColumn();
     const sheetData = googleSheet.getSheetValues(startRow, startCol, lastRow, lastCol);
+    const sheetColumnData = googleSheet.getSheetValues(startRow, startCol, startRow, lastCol);
 
-    // 基本ゲームデータマスタデータ系
-    const baseGameDataGroup: any[] = [];
-    
+    let container = {};
+    let base_game_data: any[] = [];
     // 基本ゲームデータマスタデータシート
-    if (googleSheet[0].getSheetName() === sheetNames[0]) {
-        for (let sheetDataCount = 1; sheetDataCount <= (lastRow - startRow); ++sheetDataCount) {
-            baseGameDataGroup[sheetDataCount - 1] = {
-                base_game_data_id: sheetData[sheetDataCount][0],
-                play_time: sheetData[sheetDataCount][1],
-                fever_time: sheetData[sheetDataCount][2],
-            };
+    for(let i = 0; i < (lastRow - startRow); ++i){
+        for(let j = 0; j < sheetData[0].length; ++j){
+            container[sheetColumnData[0][j].toString()] = sheetData[i + 1][j];
         }
+        base_game_data[i] = container;
     }
+    let result = {base_game_data};
+    Browser.msgBox(JSON.stringify(result));
 }
 
 // すべてのスプレッドシートのデータを取得
