@@ -1,6 +1,5 @@
 // メニューからJSONダウンロードスクリプトを呼べるようにするための変数の用意
 let methodNames: string[] = ["DownloadJsonFileActiveSheet", "DownloadJsonFileAllSheet"];
-let spreadSheetId = "1lYnchQUgjBV1L7UVWQtG-dGRL6yWVDVQQJBpR97Lkuc";
 
 // Google SpreadSheetに拡張メニューを追加
 function onOpen() {

@@ -3,12 +3,23 @@ function ImportMasterDataSheetActive(googleSheet: GoogleAppsScript.Spreadsheet.S
     // シートの最終行番号、最終列番号を取得
     const startRow = 3;
     const startCol = 1;
+    const sheetNames = GetMasterDataAllSheetNames();
     const lastRow = googleSheet.getLastRow();
     const lastCol = googleSheet.getLastColumn();
     const sheetData = googleSheet.getSheetValues(startRow, startCol, lastRow, lastCol);
 
-    if (googleSheet.getSheetName() === "基本ゲームデータ") {
-        Browser.msgBox("基本ゲームデータのマスタだよ。");
+    // 基本ゲームデータマスタデータ系
+    const baseGameDataGroup: any[] = [];
+    
+    // 基本ゲームデータマスタデータシート
+    if (googleSheet[0].getSheetName() === sheetNames[0]) {
+        for (let sheetDataCount = 1; sheetDataCount <= (lastRow - startRow); ++sheetDataCount) {
+            baseGameDataGroup[sheetDataCount - 1] = {
+                base_game_data_id: sheetData[sheetDataCount][0],
+                play_time: sheetData[sheetDataCount][1],
+                fever_time: sheetData[sheetDataCount][2],
+            };
+        }
     }
 }
 
