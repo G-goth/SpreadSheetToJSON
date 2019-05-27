@@ -1,3 +1,8 @@
+function GetMasterDataActiveSheetName() {
+    const activeSheet: string = SpreadsheetApp.getActiveSheet().getName();
+    return activeSheet;
+}
+
 // 各シート名を変数に入れて配列で返す
 function GetMasterDataAllSheetNames() {
     // シート名を一括で受け取る
