@@ -3,7 +3,7 @@ function GenerateFilesLink(folderId: string) {
     const url = "https://drive.google.com/drive/folders/" + folderId;
     // tslint:disable-next-line:prefer-const
     let htmlOutput = HtmlService
-    .createHtmlOutput('<p><a href="' + url + '" target="blank">リンクです</a></p>')
+    .createHtmlOutput('<p><a href="' + url + '" target="blank">JSONファイル生成しました</a></p>')
     .setSandboxMode(HtmlService.SandboxMode.IFRAME)
     .setWidth(250)
     .setHeight(100);

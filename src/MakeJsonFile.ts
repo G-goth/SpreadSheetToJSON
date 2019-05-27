@@ -5,9 +5,9 @@ function MakeJsonFile(jsonStr: any) {
     const lineDelimiter = ",";
     const newLineChar = "\n";*/
     const fileName = "GoldFishCaptureMasterData.json";　// 任意のjsonのファイル名を記入
-    const folderId = "1D0s0eM3jDNW6NRyk3Qcfbe-dnxLbXEeA";
+    const folderId = "1pbBwWgWKsEZde6q75q1jQI4kK1FX9pQx";
 
-    // 既に同盟のファイルがある場合は削除する
+    // 既に同名のファイルがある場合は削除する
     const folder = DriveApp.getFolderById(folderId);
     if (folder.getFilesByName(fileName).hasNext()) {
         const opt = Browser.msgBox("既にマスタデータファイルがあります。生成してもよろしいですか？", Browser.Buttons.OK_CANCEL);
@@ -17,12 +17,14 @@ function MakeJsonFile(jsonStr: any) {
             folder.removeFile(jsonFile);
             // ファイルの作成
             folder.createFile(fileName, jsonStr);
+            GenerateFilesLink(folderId);
         } else {
             Browser.msgBox("ファイルの生成を取りやめました。");
         }
     } else {
         // ファイルの新規作成
         folder.createFile(fileName, jsonStr);
+        GenerateFilesLink(folderId);
     }
 }
 
@@ -33,9 +35,9 @@ function MakeJsonFileSequentially(jsonStr: any, fileName: string) {
     const lineDelimiter = ",";
     const newLineChar = "\n";*/
     const fullFileName = fileName + ".json";
-    const folderId = "1D0s0eM3jDNW6NRyk3Qcfbe-dnxLbXEeA";
+    const folderId = "1pbBwWgWKsEZde6q75q1jQI4kK1FX9pQx";
 
-    // 既に同盟のファイルがある場合は削除する
+    // 既に同名のファイルがある場合は削除する
     const folder = DriveApp.getFolderById(folderId);
     if (folder.getFilesByName(fullFileName).hasNext()) {
         // ファイルの削除

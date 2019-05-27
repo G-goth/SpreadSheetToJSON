@@ -4,8 +4,14 @@ function DownloadJsonFileActiveSheet() {
     ImportMasterDataSheetActive(activeSheet);
 }
 
-// 開いているスプレッドシートのすべてのシートをJSONファイルに出力する
+// 開いているスプレッドシートのすべてのシートをJSONファイルに出力する(個別ファイルに出力)
 function DownloadJsonFileAllSheet() {
     const allSheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
     ImportMasterDataAllSheets(allSheets);
+}
+
+// 開いているスプレッドシートのすべてのシートをJSONファイルに出力する(個別ファイルに出力)
+function DownloadJsonFileSheetAllinOne() {
+    const allInOneSheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
+    ImportMasterDataSheetAllinOne(allInOneSheets);
 }
