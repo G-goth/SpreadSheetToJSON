@@ -47,4 +47,5 @@ function MakeJsonFileSequentially(jsonStr: any, fileName: string) {
         // ファイルの新規作成
         folder.createFile(fullFileName, jsonStr);
     }
+    GenerateFilesLink(folderId);
 }

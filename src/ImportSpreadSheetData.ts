@@ -1,4 +1,4 @@
-// アクティブになっているスプレッドシートのデータを取得
+// スプレッドシートのデータを取得のベース
 // tslint:disable-next-line:max-line-length
 function ImportMasterDataSheet(googleSheet: GoogleAppsScript.Spreadsheet.Sheet, sheetName?: string) {
     // シートの最終行番号、最終列番号を取得
