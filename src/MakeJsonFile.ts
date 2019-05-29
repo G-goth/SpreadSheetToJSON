@@ -1,5 +1,5 @@
 // 受け取った文字列をJSONファイルを作る
-function MakeJsonFile(jsonStr: any) {
+function MakeJsonFile(jsonStr: string) {
     /*const contentType = "text/plain";
     const charSet = "UTF-8";
     const lineDelimiter = ",";
