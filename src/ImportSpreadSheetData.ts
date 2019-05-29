@@ -39,8 +39,8 @@ function ImportMasterDataSheet(googleSheet: GoogleAppsScript.Spreadsheet.Sheet, 
 function ImportMasterDataSheetActive(googleSheet: GoogleAppsScript.Spreadsheet.Sheet) {
     const sheetName = googleSheet.getSheetName();
     const jsonStr = ImportMasterDataSheet(googleSheet, sheetName);
-    // Browser.msgBox(jsonStr);
-    MakeJsonFile(JSON.stringify(jsonStr));
+    // Browser.msgBox("{" + jsonStr + "}");
+    MakeJsonFile(("{" + jsonStr + "}"));
 }
 // すべてのスプレッドシートのデータを取得してJSON用に整形した文字列を受け取る
 function ImportMasterDataSheetAllinOne(googleSheet: GoogleAppsScript.Spreadsheet.Sheet[]) {
