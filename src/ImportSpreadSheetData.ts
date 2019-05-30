@@ -14,7 +14,7 @@ class GetSpreadSheetData {
         return "";
     }
     public OutPutActiveMasterDataToJSON(googleSheet: GoogleAppsScript.Spreadsheet.Sheet) {
-        const result: string = this.ImportMasterDataSheet(googleSheet, googleSheet.getSheetName()) + ",";
+        const result: string = this.ImportMasterDataSheet(googleSheet, googleSheet.getSheetName());
         Browser.msgBox("{" + result + "}");
     }
 
