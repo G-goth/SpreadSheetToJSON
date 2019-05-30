@@ -18,10 +18,12 @@ function MakeJsonFile(jsonStr: string) {
             // ファイルの作成
             folder.createFile(fileName, jsonStr);
             GenerateFilesLink(folderId);
-        } else {
+        }
+        else {
             Browser.msgBox("ファイルの生成を取りやめました。");
         }
-    } else {
+    }
+    else {
         // ファイルの新規作成
         folder.createFile(fileName, jsonStr);
         GenerateFilesLink(folderId);
@@ -45,7 +47,8 @@ function MakeJsonFileSequentially(jsonStr: any, fileName: string) {
         folder.removeFile(jsonFile);
         // ファイルの作成
         folder.createFile(fullFileName, jsonStr);
-    } else {
+    }
+    else {
         // ファイルの新規作成
         folder.createFile(fullFileName, jsonStr);
     }
