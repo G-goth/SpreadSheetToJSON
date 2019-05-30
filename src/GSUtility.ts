@@ -8,7 +8,6 @@ function GetMasterDataAllSheetNames() {
     // シート名を一括で受け取る
     const sheetNames: string[] = [];
     const allSheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
-    // tslint:disable-next-line:forin
     for (const i in allSheets) {
         sheetNames[i] = allSheets[i].getName();
     }

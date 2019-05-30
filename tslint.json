@@ -8,6 +8,7 @@
         "strict": true,
         "no-trailing-whitespace": false,
         "one-line": true,
+        "forin": false,
         "prefer-for-of": false,
         "max-classes-per-file": [
             true, 5
