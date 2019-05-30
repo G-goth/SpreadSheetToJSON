@@ -4,6 +4,17 @@
         "tslint:recommended"
     ],
     "jsRules": {},
-    "rules": {},
+    "rules": {
+        "strict": true,
+        "no-trailing-whitespace": false,
+        "one-line": true,
+        "prefer-for-of": false,
+        "max-classes-per-file": [
+            true, 5
+        ],
+        "max-line-length": [
+            true, 200
+        ]
+    },
     "rulesDirectory": []
 }

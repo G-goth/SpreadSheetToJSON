@@ -1,17 +1,25 @@
 // 現在アクティブになっているシートのデータをJSONファイルに出力する
 function DownloadJsonFileActiveSheet() {
-    const activeSheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    ImportMasterDataSheetActive(activeSheet);
+    const dlJsonFile = new DownloadJSONFile();
+    dlJsonFile.DownloadJsonFileActiveSheet();
 }
-
 // 開いているスプレッドシートのすべてのシートをJSONファイルに出力する(個別ファイルに出力)
 function DownloadJsonFileSheetAllinOne() {
-    const allInOneSheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
-    ImportMasterDataSheetAllinOne(allInOneSheets);
+    const dlJsonFile = new DownloadJSONFile();
+    dlJsonFile.DownloadJsonFileSheetAllinOne();
 }
 
-// 開いているスプレッドシートのすべてのシートをJSONファイルに出力する(個別ファイルに出力)
-function DownloadJsonFilendividualPackagingSheet() {
-    const allSheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
-    ImportMasterDataSheetIndividualPackaging(allSheets);
+class DownloadJSONFile {
+    public DownloadJsonFileActiveSheet() {
+        const getData = new GetSpreadSheetData();
+        const activeSheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+        getData.OutPutActiveMasterDataToJSON(activeSheet);
+    }
+    
+    // 開いているスプレッドシートのすべてのシートをJSONファイルに出力する(個別ファイルに出力)
+    public DownloadJsonFileSheetAllinOne() {
+        const getData = new GetSpreadSheetData();
+        const allInOneSheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
+        getData.OutPutMasterDataToJSON(allInOneSheets);
+    }
 }
