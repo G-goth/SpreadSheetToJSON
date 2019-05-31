@@ -10,6 +10,16 @@ function onOpen() {
     // menu.addItem("すべてのシートをJSONに出力", methodNames[2]);
     menu.addToUi();
 }
+// 現在アクティブになっているシートのデータをJSONファイルに出力する
+function DownloadJsonFileActiveSheet() {
+    const dlJsonFile = new DownloadJSONFile();
+    dlJsonFile.DownloadJsonFileActiveSheet();
+}
+// 開いているスプレッドシートのすべてのシートをJSONファイルに出力する(個別ファイルに出力)
+function DownloadJsonFileSheetAllinOne() {
+    const dlJsonFile = new DownloadJSONFile();
+    dlJsonFile.DownloadJsonFileSheetAllinOne();
+}
 
 class FileTrasporter {
     private folderId: string;
