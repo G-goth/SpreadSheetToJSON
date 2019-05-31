@@ -17,7 +17,7 @@ class GetSpreadSheetData {
     public OutPutActiveMasterDataToJSON(googleSheet: GoogleAppsScript.Spreadsheet.Sheet): void {
         const makeJson: MakeJsonFiles = new MakeJsonFiles();
         const result: string = this.ImportMasterDataSheet(googleSheet, googleSheet.getSheetName());
-        makeJson.MakeJsonFile("{" + result + "}");
+        makeJson.MakeActiveJsonFile("{" + result + "}");
         // Browser.msgBox("{" + result + "}");
     }
 
