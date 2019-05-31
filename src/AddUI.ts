@@ -10,3 +10,20 @@ function onOpen() {
     // menu.addItem("すべてのシートをJSONに出力", methodNames[2]);
     menu.addToUi();
 }
+
+class FileTrasporter {
+    private folderId: string;
+    private url: string = "https://drive.google.com/drive/folders/" + this.folderId;
+    constructor(folderId: string) {
+        this.folderId = folderId;
+    }
+
+    public GeneretaFolderPathLink(): void {
+        const htmlOutput = HtmlService
+        .createHtmlOutput('<p><a href="' + this.url + '" target="blank">JSONファイル生成しました</a></p>')
+        .setSandboxMode(HtmlService.SandboxMode.IFRAME)
+        .setWidth(250)
+        .setHeight(100);
+        SpreadsheetApp.getUi().showModelessDialog(htmlOutput, "ファイルへのリンク");
+    }
+}
