@@ -5,7 +5,7 @@ let methodNames: string[] = ["DownloadJsonFileActiveSheet", "DownloadJsonFileShe
 function onOpen() {
     const ui = SpreadsheetApp.getUi();
     const menu = ui.createMenu("マスタデータ");
-    menu.addItem("現在のシートをJSONに出力", methodNames[0]);
+    // menu.addItem("現在のシートをJSONに出力", methodNames[0]);
     menu.addItem("すべてのシートをJSONに出力", methodNames[1]);
     // menu.addItem("すべてのシートをJSONに出力", methodNames[2]);
     menu.addToUi();
@@ -27,7 +27,7 @@ class FileTrasporter {
     constructor(folderId: string) {
         this.folderId = folderId;
     }
-
+    
     public GeneretaFolderPathLink(): void {
         this.url += this.folderId;
         const htmlOutput = HtmlService
