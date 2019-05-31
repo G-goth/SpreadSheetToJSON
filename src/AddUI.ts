@@ -13,12 +13,13 @@ function onOpen() {
 
 class FileTrasporter {
     private folderId: string;
-    private url: string = "https://drive.google.com/drive/folders/" + this.folderId;
+    private url: string = "https://drive.google.com/drive/folders/";
     constructor(folderId: string) {
         this.folderId = folderId;
     }
 
     public GeneretaFolderPathLink(): void {
+        this.url += this.folderId;
         const htmlOutput = HtmlService
         .createHtmlOutput('<p><a href="' + this.url + '" target="blank">JSONファイル生成しました</a></p>')
         .setSandboxMode(HtmlService.SandboxMode.IFRAME)
