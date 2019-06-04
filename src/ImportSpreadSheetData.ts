@@ -44,7 +44,7 @@ class GetSpreadSheetData {
         for (let i = 0; i < sheetData[0].length; ++i) {
             container[columnDataArray[0][i].toString()] = sheetData[1][i];
         }
-        const result = JSON.stringify(container);
+        const result = JSON.stringify(container, undefined, "\t");
         return result;
     }
     // スプレッドシート内のマスタデータが2列以上ある場合のメソッド
@@ -58,7 +58,7 @@ class GetSpreadSheetData {
             goldfishMasterArray[i] = container;
             container = {};
         }
-        const result = JSON.stringify(goldfishMasterArray);
+        const result = JSON.stringify(goldfishMasterArray, undefined, "\t");
         return result;
     }
 }
