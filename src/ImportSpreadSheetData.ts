@@ -30,16 +30,16 @@ class GetSpreadSheetData {
 
         let result: string = "";
         if (columnDiffCount <= 1) {
-            result = this.ImportOneDataSpreadSheet(sheetColumnData, sheetData, columnDiffCount);
+            result = this.ImportOneDataSpreadSheet(sheetColumnData, sheetData);
         }
         else {
-            result = this.ImportMultipleLinesDataSpreadSheet(sheetColumnData, sheetData, columnDiffCount);
+            result = this.ImportMultipleLinesDataSpreadSheet(sheetColumnData, sheetData);
         }
         return '"' + sheetName + '":' + result;
     }
 
-    // スプレッドシート内のマスタデータが1列しかなかっときのメソッド
-    private ImportOneDataSpreadSheet(columnDataArray: object[][], sheetData: object[][], columnDiffCount: number): string {
+    // スプレッドシート内のマスタデータが1列しかなかった時のメソッド
+    private ImportOneDataSpreadSheet(columnDataArray: object[][], sheetData: object[][]): string {
         const container = {};
         for (let i = 0; i < sheetData[0].length; ++i) {
             container[columnDataArray[0][i].toString()] = sheetData[1][i];
@@ -48,7 +48,7 @@ class GetSpreadSheetData {
         return result;
     }
     // スプレッドシート内のマスタデータが2列以上ある場合のメソッド
-    private ImportMultipleLinesDataSpreadSheet(columnDataArray: object[][], sheetData: object[][], columnDiffCount: number): string {
+    private ImportMultipleLinesDataSpreadSheet(columnDataArray: object[][], sheetData: object[][]): string {
         const goldfishMasterArray: object[] = [];
         let container = {};
         for (let i = 0; i < (sheetData.length - this.startRow); ++i) {
