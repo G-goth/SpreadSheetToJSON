@@ -1,13 +1,13 @@
 // メニューからJSONダウンロードスクリプトを呼べるようにするための変数の用意
-let methodNames: string[] = ["DownloadJsonFileActiveSheet", "DownloadJsonFileSheetAllinOne", "DownloadJsonFilendividualPackagingSheet"];
+let methodNames: string[] = ["DownloadJsonFileActiveSheet", "DownloadJsonFileSheetAllinOne", "OutPutJSONTestFunction"];
 
 // Google SpreadSheetに拡張メニューを追加
 function onOpen() {
     const ui = SpreadsheetApp.getUi();
     const menu = ui.createMenu("マスタデータ");
-    // menu.addItem("現在のシートをJSONに出力", methodNames[0]);
+    menu.addItem("現在のシートをJSONに出力", methodNames[0]);
     menu.addItem("すべてのシートをJSONに出力", methodNames[1]);
-    // menu.addItem("すべてのシートをJSONに出力", methodNames[2]);
+    menu.addItem("JSON出力テスト", methodNames[2]);
     menu.addToUi();
 }
 // 現在アクティブになっているシートのデータをJSONファイルに出力する
@@ -19,6 +19,22 @@ function DownloadJsonFileActiveSheet() {
 function DownloadJsonFileSheetAllinOne() {
     const dlJsonFile = new DownloadJSONFile();
     dlJsonFile.DownloadJsonFileSheetAllinOne();
+}
+// テスト用メソッド
+function OutPutJSONTestFunction() {
+    const allInFileName: string = "Test.json";　// 任意のjsonのファイル名を記入
+    const folderId: string = "1pbBwWgWKsEZde6q75q1jQI4kK1FX9pQx";
+    const folder: GoogleAppsScript.Drive.Folder = DriveApp.getFolderById(folderId);
+    const container1 = {};
+    const container2 = {};
+    container1["aaa"] = "aaa";
+    container1["bbb"] = "bbb";
+    container2["ccc"] = "ccc";
+    container2["ddd"] = "ddd";
+    const containerArray: any[] = [container2, container2];
+    let result = '"aaa":' + JSON.stringify(container1, null, "\t");
+    result += ',\n"bbb":' + JSON.stringify(containerArray, null, "\t");
+    folder.createFile(allInFileName, "{" + result + "}");
 }
 
 class FileTrasporter {
