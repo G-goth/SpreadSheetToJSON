@@ -9,6 +9,7 @@
         "no-trailing-whitespace": false,
         "one-line": true,
         "forin": false,
+        "no-string-literal": false,
         "prefer-for-of": false,
         "max-classes-per-file": [
             true, 5
