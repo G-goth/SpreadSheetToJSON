@@ -37,22 +37,6 @@ class GetSpreadSheetData {
         }
         return '"' + sheetName + '":' + result;
     }
-    // private ImportMasterDataSheet(googleSheet: GoogleAppsScript.Spreadsheet.Sheet): any {
-    //     const lastRow = googleSheet.getLastRow();
-    //     const lastCol = googleSheet.getLastColumn();
-    //     const sheetData = googleSheet.getSheetValues(this.startRow, this.startCol, lastRow, lastCol);
-    //     const sheetColumnData = googleSheet.getSheetValues(this.startRow, this.startCol, this.startRow, lastCol);
-    //     const columnDiffCount: number = sheetData.length - this.startRow;
-
-    //     let result: any;
-    //     if (columnDiffCount <= 1) {
-    //         result = this.ImportOneDataSpreadSheet(sheetColumnData, sheetData);
-    //     }
-    //     else {
-    //         result = this.ImportMultipleLinesDataSpreadSheet(sheetColumnData, sheetData);
-    //     }
-    //     return result;
-    // }
 
     // スプレッドシート内のマスタデータが1列しかなかった時のメソッド
     private ImportOneDataSpreadSheet(columnDataArray: object[][], sheetData: object[][]): string {
@@ -63,14 +47,6 @@ class GetSpreadSheetData {
         const result = JSON.stringify(container, undefined, "\t");
         return result;
     }
-    // private ImportOneDataSpreadSheet(columnDataArray: object[][], sheetData: object[][]): {} {
-    //     const container = {};
-    //     for (let i = 0; i < sheetData[0].length; ++i) {
-    //         container[columnDataArray[0][i].toString()] = sheetData[1][i];
-    //     }
-    //     const result = container;
-    //     return result;
-    // }
 
     // スプレッドシート内のマスタデータが2列以上ある場合のメソッド
     private ImportMultipleLinesDataSpreadSheet(columnDataArray: object[][], sheetData: object[][]): string {
@@ -86,17 +62,4 @@ class GetSpreadSheetData {
         const result = JSON.stringify(goldfishMasterArray, undefined, "\t");
         return result;
     }
-    // private ImportMultipleLinesDataSpreadSheet(columnDataArray: object[][], sheetData: object[][]): object[] {
-    //     const goldfishMasterArray: object[] = [];
-    //     let container = {};
-    //     for (let i = 0; i < (sheetData.length - this.startRow); ++i) {
-    //         for (let j = 0; j < sheetData[0].length; ++j) {
-    //             container[columnDataArray[0][j].toString()] = sheetData[i + 1][j];
-    //         }
-    //         goldfishMasterArray[i] = container;
-    //         container = {};
-    //     }
-    //     const result = goldfishMasterArray;
-    //     return result;
-    // }
 }
