@@ -67,7 +67,7 @@ class GetSpreadSheetData {
         return result;
     }
 
-    // キー値に余計な値が入っている場合は弾くメソッド
+    // キー値に何も入っていない場合は弾く
     private StringReplacer(key: string, value: string): string {
         if (typeof value === "string") {
             return undefined;
