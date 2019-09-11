@@ -7,7 +7,7 @@ function onOpen() {
     const menu = ui.createMenu("マスタデータ");
     menu.addItem("現在のシートをJSONに出力", methodNames[0]);
     menu.addItem("すべてのシートをJSONに出力", methodNames[1]);
-    menu.addItem("テスト用", methodNames[2]);
+    // menu.addItem("テスト用", methodNames[2]);
     menu.addToUi();
 }
 // 現在アクティブになっているシートのデータをJSONファイルに出力する

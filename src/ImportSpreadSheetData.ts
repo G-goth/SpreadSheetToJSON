@@ -2,7 +2,6 @@
 class GetSpreadSheetData {
     private startRow: number = 3;
     private startCol: number = 1;
-    private getRowNum: number = 3;
 
     // すべてのシートのデータをJSON文字列として出力
     public OutPutMasterDataToJSON(googleSheet: GoogleAppsScript.Spreadsheet.Sheet[]): void {
