@@ -2,6 +2,7 @@
 class GetSpreadSheetData {
     private startRow: number = 3;
     private startCol: number = 1;
+    private getRowNum: number = 3;
 
     // すべてのシートのデータをJSON文字列として出力
     public OutPutMasterDataToJSON(googleSheet: GoogleAppsScript.Spreadsheet.Sheet[]): void {
@@ -14,6 +15,8 @@ class GetSpreadSheetData {
         makeJson.MakeJsonFile("{" + result + "}");
         // Browser.msgBox("{" + result + "}");
     }
+
+    // アクティブになっているシートをJSON文字列に変換
     public OutPutActiveMasterDataToJSON(googleSheet: GoogleAppsScript.Spreadsheet.Sheet): void {
         const makeJson: MakeJsonFiles = new MakeJsonFiles();
         const result: string = this.ImportMasterDataSheet(googleSheet, googleSheet.getSheetName());
@@ -44,7 +47,8 @@ class GetSpreadSheetData {
         for (let i = 0; i < sheetData[0].length; ++i) {
             container[columnDataArray[0][i].toString()] = sheetData[1][i];
         }
-        const result = JSON.stringify(container, undefined, "\t");
+        // const result = JSON.stringify(container, undefined, "\t");
+        const result = JSON.stringify(container, this.StringReplacer, "\t");
         return result;
     }
 
@@ -59,7 +63,16 @@ class GetSpreadSheetData {
             goldfishMasterArray[i] = container;
             container = {};
         }
-        const result = JSON.stringify(goldfishMasterArray, undefined, "\t");
+        // const result = JSON.stringify(goldfishMasterArray, undefined, "\t");
+        const result = JSON.stringify(goldfishMasterArray, this.StringReplacer, "\t");
         return result;
+    }
+
+    // キー値に余計な値が入っている場合は弾くメソッド
+    private StringReplacer(key: string, value: string): string {
+        if (typeof value === "string") {
+            return undefined;
+        }
+        return value;
     }
 }
