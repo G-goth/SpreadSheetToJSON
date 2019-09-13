@@ -4,7 +4,9 @@ class MakeJsonFiles {
     private allInFileName: string = "Test.json";　// 任意のjsonのファイル名を記入
     private activeInFileName: string = "ActiveGoldFishCaptureMasterData.json";　// 任意のjsonのファイル名を記入
     private folderId: string = "1pbBwWgWKsEZde6q75q1jQI4kK1FX9pQx";
+    private myFolderId: string = "u/0/my-drive";
     private folder: GoogleAppsScript.Drive.Folder = DriveApp.getFolderById(this.folderId);
+    private myFolder: GoogleAppsScript.Drive.Folder = DriveApp.getFolderById(this.myFolderId);
 
     public MakeJsonFile(jsonStr: string): void {
         const addUi: FileTrasporter = new FileTrasporter(this.folderId);

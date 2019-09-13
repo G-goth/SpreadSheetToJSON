@@ -30,6 +30,8 @@ function OutPutJSONTestFunction() {
 class FileTrasporter {
     private folderId: string;
     private url: string = "https://drive.google.com/drive/folders/";
+    private myFolderUrl: string = "https://drive.google.com/drive/";
+    
     constructor(folderId: string) {
         this.folderId = folderId;
     }
