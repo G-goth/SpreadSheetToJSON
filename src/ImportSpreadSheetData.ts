@@ -6,20 +6,27 @@ class GetSpreadSheetData {
     // すべてのシートのデータをJSON文字列として出力
     public OutPutMasterDataToJSON(googleSheet: GoogleAppsScript.Spreadsheet.Sheet[]): void {
         const makeJson: MakeJsonFiles = new MakeJsonFiles();
+        const makeJsonMyFolder: MakeJsonFilesMyFolder = new MakeJsonFilesMyFolder();
         let result: string = "";
+
         for (let i = 0; i < (googleSheet.length - 1); ++i) {
             result += this.ImportMasterDataSheet(googleSheet[i], googleSheet[i].getSheetName()) + ",";
         }
         result += this.ImportMasterDataSheet(googleSheet[googleSheet.length - 1], googleSheet[googleSheet.length - 1].getSheetName());
-        makeJson.MakeJsonFile("{" + result + "}");
+        
+        // makeJson.MakeJsonFile("{" + result + "}");
+        makeJsonMyFolder.MakeJsonFileMyFolder("{" + result + "}");
         // Browser.msgBox("{" + result + "}");
     }
 
     // アクティブになっているシートをJSON文字列に変換
     public OutPutActiveMasterDataToJSON(googleSheet: GoogleAppsScript.Spreadsheet.Sheet): void {
         const makeJson: MakeJsonFiles = new MakeJsonFiles();
+        const makeJsonMyFolder: MakeJsonFilesMyFolder = new MakeJsonFilesMyFolder();
         const result: string = this.ImportMasterDataSheet(googleSheet, googleSheet.getSheetName());
-        makeJson.MakeActiveJsonFile("{" + result + "}");
+
+        // makeJson.MakeActiveJsonFile("{" + result + "}");
+        makeJsonMyFolder.MakeActiveJsonFileMyFolder("{" + result + "}");
         // Browser.msgBox("{" + result + "}");
     }
 

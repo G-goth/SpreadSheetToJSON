@@ -4,9 +4,7 @@ class MakeJsonFiles {
     private allInFileName: string = "Test.json";　// 任意のjsonのファイル名を記入
     private activeInFileName: string = "ActiveGoldFishCaptureMasterData.json";　// 任意のjsonのファイル名を記入
     private folderId: string = "1pbBwWgWKsEZde6q75q1jQI4kK1FX9pQx";
-    private myFolderId: string = "u/0/my-drive";
     private folder: GoogleAppsScript.Drive.Folder = DriveApp.getFolderById(this.folderId);
-    private myFolder: GoogleAppsScript.Drive.Folder = DriveApp.getFolderById(this.myFolderId);
 
     public MakeJsonFile(jsonStr: string): void {
         const addUi: FileTrasporter = new FileTrasporter(this.folderId);
@@ -18,7 +16,7 @@ class MakeJsonFiles {
         else {
             // ファイルの新規作成
             this.folder.createFile(this.allInFileName, jsonStr);
-            addUi.GeneretaFolderPathLink();
+            addUi.GenereteFolderPathLink();
         }
     }
     public MakeActiveJsonFile(jsonStr: string): void {
@@ -31,7 +29,7 @@ class MakeJsonFiles {
         else {
             // ファイルの新規作成
             this.folder.createFile(this.activeInFileName, jsonStr);
-            addUi.GeneretaFolderPathLink();
+            addUi.GenereteFolderPathLink();
         }
     }
 
@@ -44,7 +42,7 @@ class MakeJsonFiles {
             this.folder.removeFile(jsonFile);
             // ファイルの作成
             this.folder.createFile(this.allInFileName, jsonStr);
-            addUi.GeneretaFolderPathLink();
+            addUi.GenereteFolderPathLink();
         }
         else {
             Browser.msgBox("ファイルの生成を取りやめました。");

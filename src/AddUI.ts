@@ -5,7 +5,7 @@ let methodNames: string[] = ["DownloadJsonFileActiveSheet", "DownloadJsonFileShe
 function onOpen() {
     const ui = SpreadsheetApp.getUi();
     const menu = ui.createMenu("マスタデータ");
-    // menu.addItem("現在のシートをJSONに出力", methodNames[0]);
+    menu.addItem("現在のシートをJSONに出力", methodNames[0]);
     menu.addItem("すべてのシートをJSONに出力", methodNames[1]);
     // menu.addItem("テスト用", methodNames[2]);
     menu.addToUi();
@@ -36,10 +36,20 @@ class FileTrasporter {
         this.folderId = folderId;
     }
     
-    public GeneretaFolderPathLink(): void {
+    public GenereteFolderPathLink(): void {
         this.url += this.folderId;
         const htmlOutput = HtmlService
         .createHtmlOutput('<p><a href="' + this.url + '" target="blank">JSONファイル生成しました</a></p>')
+        .setSandboxMode(HtmlService.SandboxMode.IFRAME)
+        .setWidth(250)
+        .setHeight(100);
+        SpreadsheetApp.getUi().showModelessDialog(htmlOutput, "ファイルへのリンク");
+    }
+
+    public GenerateMyFolderPathLink() {
+        this.myFolderUrl += this.folderId;
+        const htmlOutput = HtmlService
+        .createHtmlOutput('<p><a href="' + this.myFolderUrl + '" target="blank">JSONファイル生成しました</a></p>')
         .setSandboxMode(HtmlService.SandboxMode.IFRAME)
         .setWidth(250)
         .setHeight(100);
