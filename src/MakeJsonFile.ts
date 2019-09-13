@@ -1,7 +1,6 @@
 // 受け取った文字列をJSONファイルを作る
 class MakeJsonFiles {
-    // private allInFileName: string = "GoldFishCaptureMasterData.json";　// 任意のjsonのファイル名を記入
-    private allInFileName: string = "Test.json";　// 任意のjsonのファイル名を記入
+    private allInFileName: string = "GoldFishCaptureMasterData.json";　// 任意のjsonのファイル名を記入
     private activeInFileName: string = "ActiveGoldFishCaptureMasterData.json";　// 任意のjsonのファイル名を記入
     private folderId: string = "1pbBwWgWKsEZde6q75q1jQI4kK1FX9pQx";
     private folder: GoogleAppsScript.Drive.Folder = DriveApp.getFolderById(this.folderId);
